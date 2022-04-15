@@ -1,0 +1,45 @@
+@import "./variables.less";
+@import "./maxin.less";
+@import "./sidebar.less";
+@import "./transition.less";
+// 设置相同的样式
+#outLine(){
+  outline: none;
+}
+// 整体设置为全屏高度
+html,body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+#app{
+  height: 100%;
+}
+a{
+  cursor: pointer;
+  text-decoration: none;
+  &:focus{
+    #outLine()
+  }
+  &:hover{
+    #outLine()
+  }
+}
+div:focus{
+  #outLine()
+}
+// 清除浮动
+.clearfix{
+  &::after{
+    content: '';
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    height: 0;
+    clear: both;
+  }
+}
+#driver-highlighted-element-stage{
+  background: transparent !important;
+  border: 1px dashed #ccc;
+}
