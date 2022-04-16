@@ -3,10 +3,12 @@
     <!-- 头部两个导入导出按钮 -->
     <el-card>
       <div class="header">
-        <el-button type="primary" @click="importExcelClick">{{
+        <el-button type="primary" @click="onImportExcelClick">{{
           $t("msg.excel.importExcel")
         }}</el-button>
-        <el-button type="success">{{ $t("msg.excel.exportExcel") }}</el-button>
+        <el-button type="success" @click="onToExcelClick">{{
+          $t("msg.excel.exportExcel")
+        }}</el-button>
       </div>
     </el-card>
     <el-card>
@@ -62,13 +64,13 @@
         <el-table-column
           prop="openTime"
           :label="$t('msg.excel.openTime')"
-          width="width"
           align="center"
         >
           <template #default="{ row }">{{
             $filters.dateFilter(row.openTime)
           }}</template>
         </el-table-column>
+        <!-- 按钮 -->
         <el-table-column
           prop="action"
           :label="$t('msg.excel.action')"
@@ -76,14 +78,14 @@
           fixed="right"
           align="center"
         >
-          <template #default>
+          <template #default="{ row }">
             <el-button type="primary" size="mini">{{
               $t("msg.excel.show")
             }}</el-button>
             <el-button type="info" size="mini">{{
               $t("msg.excel.showRole")
             }}</el-button>
-            <el-button type="danger" size="mini">{{
+            <el-button type="danger" size="mini" @click="removeClick(row)">{{
               $t("msg.excel.remove")
             }}</el-button>
           </template>
@@ -96,19 +98,23 @@
         v-model:page-size="size"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :page-sizes="[1, 2, 3, 5]"
+        :page-sizes="[1, 5, 10, 20]"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
       />
     </el-card>
   </div>
+  <export2-excel v-model="exportToExcelVisible"></export2-excel>
 </template>
 
 <script setup>
-import { getUserManageList } from "@/api/user.manage";
-import { ref } from "vue";
+import { getUserManageList, deleteUser } from "@/api/user.manage";
+import { ref, onActivated } from "vue";
 import { watchSwitchLang } from "@/utils/i18n";
 import { useRouter } from "vue-router";
+import { ElMessage, ElMessageBox } from "element-plus";
+import { useI18n } from "vue-i18n";
+import Export2Excel from "@/views/user-manage/components/Export2Excel.vue";
 // 定义一些与获取数据有关的变量;
 // 获取数据的数据
 const tableData = ref([]);
@@ -118,6 +124,7 @@ const total = ref(0);
 const page = ref(1);
 // 每页存放的数据
 const size = ref(2);
+const router = useRouter();
 // 获取数据的方法
 const getListData = async () => {
   const result = await getUserManageList({
@@ -130,6 +137,20 @@ const getListData = async () => {
 getListData();
 // 监听语言的切换
 watchSwitchLang(getListData);
+// 删除
+const i18n = useI18n();
+const removeClick = (row) => {
+  ElMessageBox.confirm(
+    i18n.t("msg.excel.dialogTitle1") +
+      row.username +
+      i18n.t("msg.excel.dialogTitle2"),
+    "Warning"
+  ).then(() => {
+    deleteUser(row._id);
+    ElMessage.success(i18n.t("msg.excel.removeSuccess"));
+    getListData();
+  });
+};
 // 下面分页一系列操作
 // 每页存放数据触发、
 const handleSizeChange = (currentSize) => {
@@ -142,9 +163,18 @@ const handleCurrentChange = (currentPage) => {
   getListData();
 };
 // 添加点击事件跳转路由
-const router = useRouter();
-const importExcelClick = () => {
+
+const onImportExcelClick = () => {
   router.push("/user/import");
+  // console.log(router.getRoutes());
+};
+// 处理导入用户后数据不重新加载的问题
+onActivated(getListData);
+
+// 点击导出按钮开始操作
+const exportToExcelVisible = ref(false);
+const onToExcelClick = () => {
+  exportToExcelVisible.value = true;
 };
 </script>
 

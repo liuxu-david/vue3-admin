@@ -13,6 +13,7 @@ service.interceptors.request.use(
     (config) => {
         // 配置 icode
         config.headers.icode = "BABD66E06099E542";
+
         // 在这个位置同意注入token
         if (store.state.user.token) {
             // 如果保存有token，统一注入token
@@ -39,7 +40,7 @@ service.interceptors.response.use(
             return data;
         } else {
             // 提示错误信息
-            ElMessage.err(message);
+            ElMessage.error(message);
             // 进行新的操作;
             return Promise.reject(new Error(message));
         }

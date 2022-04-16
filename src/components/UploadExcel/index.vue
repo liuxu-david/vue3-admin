@@ -29,7 +29,8 @@
 <script setup>
 import { ref, defineProps } from "vue";
 import XLSX from "xlsx";
-import { getHeaderRow } from "./utils";
+import { getHeaderRow, isExcel } from "./utils";
+import { ElMessage } from "element-plus";
 
 const props = defineProps({
   // 上传前回调
@@ -45,6 +46,7 @@ const handleUpload = () => {
   // console.log(excelUploadInput.value);
   excelUploadInput.value.click();
 };
+
 // 点击上传
 const handleChange = (e) => {
   const files = e.target.files;
@@ -58,8 +60,25 @@ const handleChange = (e) => {
 const handleDrop = (e) => {
   // 上传中的时候跳过
   if (loading.value) return;
+  const files = e.dataTransfer.files;
+  if (files.length !== 1) {
+    ElMessage.error("需要上传一个文件");
+    return;
+  }
+
+  const rawFile = files[0];
+  if (!isExcel(rawFile)) {
+    ElMessage.error("文件必须是 .xlsx, .xls, .csv 格式");
+    return false;
+  }
+  // 判断完以后才出发上传事件
+  upload(rawFile);
 };
-const handleDragover = () => {};
+const handleDragover = (e) => {
+  // 在新位置生成源项的副本
+  e.dataTransfer.dropEffect = "copy";
+};
+
 // 触发上传事件
 const upload = (rawFile) => {
   excelUploadInput.value.value = null;

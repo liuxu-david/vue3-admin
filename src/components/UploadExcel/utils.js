@@ -18,3 +18,8 @@ export const getHeaderRow = (sheet) => {
     }
     return headers;
 };
+
+// 导出判断是否是excel的文件
+export const isExcel = (file) => {
+    return /\.(xlsx|xls|csv)/.test(file.name);
+};

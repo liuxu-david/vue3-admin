@@ -3,7 +3,7 @@
     background-color="#304156"
     text-color="white"
     active-text-color="red"
-    unique-opened="true"
+    :unique-opened="true"
     :default-active="avtiveMenu"
     router
   >
