@@ -103,8 +103,8 @@
         :total="total"
       />
     </el-card>
+    <export-to-excel v-model="exportToExcelVisible"></export-to-excel>
   </div>
-  <export2-excel v-model="exportToExcelVisible"></export2-excel>
 </template>
 
 <script setup>
@@ -114,7 +114,7 @@ import { watchSwitchLang } from "@/utils/i18n";
 import { useRouter } from "vue-router";
 import { ElMessage, ElMessageBox } from "element-plus";
 import { useI18n } from "vue-i18n";
-import Export2Excel from "@/views/user-manage/components/Export2Excel.vue";
+import ExportToExcel from "@/views/user-manage/components/Export2Excel.vue";
 // 定义一些与获取数据有关的变量;
 // 获取数据的数据
 const tableData = ref([]);

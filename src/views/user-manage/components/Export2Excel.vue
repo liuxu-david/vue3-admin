@@ -1,6 +1,10 @@
 // 点击导出按钮后弹出弹窗
 <template>
-  <el-dialog :title="$t('msg.excel.title')" :model-value="modelValue">
+  <el-dialog
+    :title="$t('msg.excel.title')"
+    :model-value="modelValue"
+    @close="closed"
+  >
     <el-input
       :placeholder="$t('msg.excel.placeholder')"
       v-model="excelName"
