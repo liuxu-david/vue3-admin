@@ -13,6 +13,12 @@ export const getUserManageAllList = () => {
         url: "/user-manage/all-list",
     });
 };
+// 获取用户的详细数据
+export const userDetail = (id) => {
+    return request({
+        url: `/user-manage/detail/${id}`,
+    });
+};
 
 // 定义导入excel数据
 export const userBatchImport = (data) => {

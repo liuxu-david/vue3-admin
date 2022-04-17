@@ -23,14 +23,15 @@ const privateRouter = [{
                 path: "/user/info/:id",
                 name: "userInfo",
                 component: () =>
-                    import ("@/views/user-info"),
+                    import ("@/views/user-info/index.vue"),
+                props: true,
                 meta: {
-                    title: "uesrInfo",
+                    title: "userInfo",
                 },
             },
             {
                 path: "/user/role",
-                name: "userInfo",
+                name: "userRole",
                 component: () =>
                     import ("@/views/role-list/index.vue"),
                 meta: {
@@ -42,7 +43,7 @@ const privateRouter = [{
                 path: "/user/permission",
                 name: "permission-list",
                 component: () =>
-                    import ("@/views/permission-list/index"),
+                    import ("@/views/permission-list/index.vue"),
                 meta: {
                     title: "permissionList",
                     icon: "permission",
@@ -52,7 +53,7 @@ const privateRouter = [{
                 path: "/user/import",
                 name: "import",
                 component: () =>
-                    import ("@/views/import/index"),
+                    import ("@/views/import/index.vue"),
                 meta: {
                     title: "excelImport",
                 },

@@ -79,9 +79,12 @@
           align="center"
         >
           <template #default="{ row }">
-            <el-button type="primary" size="mini">{{
-              $t("msg.excel.show")
-            }}</el-button>
+            <el-button
+              type="primary"
+              size="mini"
+              @click="onShowClick(row._id)"
+              >{{ $t("msg.excel.show") }}</el-button
+            >
             <el-button type="info" size="mini">{{
               $t("msg.excel.showRole")
             }}</el-button>
@@ -108,7 +111,7 @@
 </template>
 
 <script setup>
-import { getUserManageList, deleteUser } from "@/api/user.manage";
+import { getUserManageList, deleteUser } from "@/api/user-manage";
 import { ref, onActivated } from "vue";
 import { watchSwitchLang } from "@/utils/i18n";
 import { useRouter } from "vue-router";
@@ -137,6 +140,11 @@ const getListData = async () => {
 getListData();
 // 监听语言的切换
 watchSwitchLang(getListData);
+// 定义查看按钮
+const onShowClick = (id) => {
+  // console.log(router.getRoutes());
+  router.push(`/user/info/${id}`);
+};
 // 删除
 const i18n = useI18n();
 const removeClick = (row) => {

@@ -15,6 +15,7 @@ export const formatDate = (numb) => {
     const year = time.getFullYear() + "";
     const month = time.getMonth() + 1 + "";
     const date = time.getDate() - 1 + "";
+    // console.log(year);
     return (
         year +
         "-" +

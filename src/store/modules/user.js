@@ -6,7 +6,6 @@ import { TOKEN } from "@/constant";
 import router from "@/router";
 import { setTimeStamp } from "@/utils/auth";
 import { variables } from "@/styles/variables.less";
-console.log(variables);
 export default {
     namespaced: true,
     state: () => ({

@@ -24,8 +24,9 @@
 import { ref, defineProps, defineEmits } from "vue";
 import { useI18n } from "vue-i18n";
 import { watchSwitchLang } from "@/utils/i18n";
-import { getUserManageAllList } from "@/api/user.manage";
+import { getUserManageAllList } from "@/api/user-manage";
 import { USER_RELATIONS } from "./Export2Excel.js";
+import { dateFilter } from "@/filters/index";
 // 这里实现v-model的父子间的通信
 defineProps({
   modelValue: {
@@ -71,9 +72,20 @@ const confirm = async () => {
   // console.log(data);
   closed();
 };
+// 将数据转化为二维数组，这样才符合excel的导出条件
 const formatJson = (datas, rows) => {
   return rows.map((item) => {
     return Object.keys(datas).map((key) => {
+      // 因为角色是特殊数据所以需要特别处理
+      if (datas[key] === "role") {
+        const roles = item[datas[key]];
+        return roles.map((role) => role.title);
+        // return JSON.stringify(roles.map((role) => role.title));
+      }
+      // 如果时间有问题，设置时间
+      if (datas[key] === "openTime") {
+        return dateFilter(item[datas[key]]);
+      }
       return item[datas[key]];
     });
   });

@@ -36,33 +36,36 @@
     </div>
     <input type="file">
     <script>
-        const btn = document.querySelector("button");
-        const ipt = document.querySelector("input");
-        btn.addEventListener("click", function() {
-                ipt.click()
-            })
-            //  数组去重
-        const arr = [1, 4, 2, 67, 24, 2, 12, 4, 2, 2, 45];
-        const newArr = [...new Set(arr)];
-        console.log(newArr);
-        // 对象转化为数组
-        const obj = {
-            name: 'david',
-            age: 19,
-            height: 188
-        }
-        const obj2 = {
-                '名字': 'david',
-                age: 19,
-                height: 188
-            }
-            // 能遍历出key值
-        const arr3 = Object.keys(obj);
-        const newObj = {};
-        newObj[obj2['名字']] = obj['名字']
-        console.log(obj['name']);
-        console.log(arr3);
-        console.log(newObj);
+        // const btn = document.querySelector("button");
+        // const ipt = document.querySelector("input");
+        // btn.addEventListener("click", function() {
+        //         ipt.click()
+        //     })
+        //     //  数组去重
+        // const arr = [1, 4, 2, 67, 24, 2, 12, 4, 2, 2, 45];
+        // const newArr = [...new Set(arr)];
+        // console.log(newArr);
+        // // 对象转化为数组
+        // const obj = {
+        //     name: 'david',
+        //     age: 19,
+        //     height: 188
+        // }
+        // const obj2 = {
+        //         '名字': 'david',
+        //         age: 19,
+        //         height: 188
+        //     }
+        //     // 能遍历出key值
+        // const arr3 = Object.keys(obj);
+        // const newObj = {};
+        // newObj[obj2['名字']] = obj['名字']
+        // console.log(obj['name']);
+        // console.log(arr3);
+        // console.log(newObj);
+        const arr5 = [1, 4, 2, 67, 24, 2, 12, 4, 2, 2, 45];
+        const obj = JSON.stringify('认识');
+        console.log(obj);
     </script>
 </body>
 

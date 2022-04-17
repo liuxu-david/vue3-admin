@@ -4,8 +4,8 @@
 
 <script setup>
 import UploadExcel from "@/components/UploadExcel";
-import { USER_RELATIONS, formatDate } from "./utils";
-import { userBatchImport } from "@/api/user.manage";
+import { USER_RELATIONS, formatDate } from "./utils.js";
+import { userBatchImport } from "@/api/user-manage";
 import { ElMessage } from "element-plus";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
@@ -33,13 +33,15 @@ const generateData = (results) => {
   results.forEach((item) => {
     const userinfo = {};
     Object.keys(item).forEach((key) => {
+      // 对时间进行分析
+
       if (USER_RELATIONS[key] === "openTime") {
         userinfo[USER_RELATIONS[key]] = formatDate(item[key]);
-        console.log(formatDate(item[key]));
-        console.log(userinfo[USER_RELATIONS[key]]);
-        return;
+        // console.log(formatDate(item[key]));
+        // console.log(userinfo[USER_RELATIONS[key]]);
+      } else {
+        userinfo[USER_RELATIONS[key]] = item[key];
       }
-      userinfo[USER_RELATIONS[key]] = item[key];
     });
     arr.push(userinfo);
   });
