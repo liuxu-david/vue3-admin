@@ -4,7 +4,7 @@ import router from "./router";
 import store from "./store";
 import installElementPlus from "./plugins/element";
 import installIcons from "@/icons/index";
-import "./permission";
+import "./permission.js";
 import i18n from "@/i18n/index";
 // 导入初始化样式表
 import "@/styles/index.less";

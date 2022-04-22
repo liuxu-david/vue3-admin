@@ -3,9 +3,12 @@
     <!-- 头部两个导入导出按钮 -->
     <el-card>
       <div class="header">
-        <el-button type="primary" @click="onImportExcelClick">{{
-          $t("msg.excel.importExcel")
-        }}</el-button>
+        <el-button
+          type="primary"
+          @click="onImportExcelClick"
+          v-permission="['importUser']"
+          >{{ $t("msg.excel.importExcel") }}</el-button
+        >
         <el-button type="success" @click="onToExcelClick">{{
           $t("msg.excel.exportExcel")
         }}</el-button>
@@ -85,12 +88,22 @@
               @click="onShowClick(row._id)"
               >{{ $t("msg.excel.show") }}</el-button
             >
-            <el-button type="info" size="mini">{{
-              $t("msg.excel.showRole")
-            }}</el-button>
-            <el-button type="danger" size="mini" @click="removeClick(row)">{{
-              $t("msg.excel.remove")
-            }}</el-button>
+            <!-- 角色 按钮 -->
+            <el-button
+              type="info"
+              size="mini"
+              @click="ShowRoleClick(row)"
+              v-permission="['distributeRole']"
+              >{{ $t("msg.excel.showRole") }}</el-button
+            >
+            <!-- 删除按钮 -->
+            <el-button
+              type="danger"
+              size="mini"
+              @click="removeClick(row)"
+              v-permission="['removeUser']"
+              >{{ $t("msg.excel.remove") }}</el-button
+            >
           </template>
         </el-table-column>
       </el-table>
@@ -107,17 +120,23 @@
       />
     </el-card>
     <export-to-excel v-model="exportToExcelVisible"></export-to-excel>
+    <roles-dialog
+      v-model="roleDialogVisible"
+      :userId="selectUserId"
+      @updateRole="getListData"
+    ></roles-dialog>
   </div>
 </template>
 
 <script setup>
 import { getUserManageList, deleteUser } from "@/api/user-manage";
-import { ref, onActivated } from "vue";
+import { ref, onActivated, watch } from "vue";
 import { watchSwitchLang } from "@/utils/i18n";
 import { useRouter } from "vue-router";
 import { ElMessage, ElMessageBox } from "element-plus";
 import { useI18n } from "vue-i18n";
 import ExportToExcel from "@/views/user-manage/components/Export2Excel.vue";
+import rolesDialog from "./components/roles";
 // 定义一些与获取数据有关的变量;
 // 获取数据的数据
 const tableData = ref([]);
@@ -184,6 +203,19 @@ const exportToExcelVisible = ref(false);
 const onToExcelClick = () => {
   exportToExcelVisible.value = true;
 };
+// 点击查看角色按钮
+const roleDialogVisible = ref(false);
+const selectUserId = ref("");
+const ShowRoleClick = (row) => {
+  roleDialogVisible.value = true;
+  selectUserId.value = row._id;
+};
+watch(roleDialogVisible, (value) => {
+  // 每次关闭后都重新获取点击项
+  if (!value) {
+    selectUserId.value = "";
+  }
+});
 </script>
 
 <style lang="less" scoped>

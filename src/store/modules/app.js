@@ -50,6 +50,7 @@ export default {
                     state.tagsViewList.length - payload.index + 1
                 );
             }
+            setItem(TAGS_VIEW, state.tagsViewList);
         },
     },
     actions: {},

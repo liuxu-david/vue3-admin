@@ -80,7 +80,7 @@ const loginRules = ref({
     tigger: "blur",
     message: i18n.t("msg.login.usernameRule"),
     // 自定义验证器
-    validator: validatePassword(),
+    // validator: validatePassword(),
   },
   password: {
     require: true,

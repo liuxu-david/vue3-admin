@@ -4,7 +4,7 @@ import path from "path-browserify";
 const getChildrenRoutes = (routers) => {
     const result = [];
     routers.forEach((route) => {
-        if (route.children.length > 0) {
+        if (route.children && route.children.length > 0) {
             result.push(...route.children);
         }
     });

@@ -20,6 +20,13 @@ export const userDetail = (id) => {
     });
 };
 
+// 定义获取指定用户的角色
+export const userRoles = (id) => {
+    return request({
+        url: `/user-manage/role/${id}`,
+    });
+};
+
 // 定义导入excel数据
 export const userBatchImport = (data) => {
     return request({
@@ -32,5 +39,17 @@ export const userBatchImport = (data) => {
 export const deleteUser = (id) => {
     return request({
         url: `/user-manage/detele/${id}`,
+    });
+};
+
+// 定义为用户分配角色的接口
+export const updateRole = (id, roles) => {
+    console.log(id);
+    return request({
+        url: `/user-manage/update-role/${id}`,
+        method: "POST",
+        data: {
+            roles,
+        },
     });
 };

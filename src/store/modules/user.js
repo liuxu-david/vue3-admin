@@ -3,7 +3,7 @@ import { login, getUserInfo } from "@/api/sys";
 import { getItem, setItem, removeAllItem } from "@/utils/storage.js";
 import md5 from "md5";
 import { TOKEN } from "@/constant";
-import router from "@/router";
+import router, { resetRouter } from "@/router";
 import { setTimeStamp } from "@/utils/auth";
 import { variables } from "@/styles/variables.less";
 export default {
@@ -52,6 +52,7 @@ export default {
             return res;
         },
         logout() {
+            resetRouter();
             // 清除token
             this.commit("user/setToken", "");
             // 清除用户信息
