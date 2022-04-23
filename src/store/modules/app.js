@@ -22,7 +22,7 @@ export default {
             const isFind = state.tagsViewList.find((item) => {
                 return item.path === tag.path;
             });
-            // 没有找到就是undefined
+            // 没有找到就是undefined,处理重复
             if (!isFind) {
                 state.tagsViewList.push(tag);
                 setItem(TAGS_VIEW, state.tagsViewList);

@@ -19,7 +19,7 @@ export default {
             },
         },
         {
-            path: "/artitle/:id",
+            path: "/article/:id",
             component: () =>
                 import ("@/views/article-detail/index.vue"),
             meta: {

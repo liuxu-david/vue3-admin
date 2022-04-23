@@ -12,7 +12,7 @@ service.interceptors.request.use(
     // 配置 icode
     (config) => {
         // 配置 icode
-        config.headers.icode = "BABD66E06099E542";
+        config.headers.icode = "E97347CE9AE6E7A3";
 
         // 在这个位置同意注入token
         if (store.state.user.token) {
