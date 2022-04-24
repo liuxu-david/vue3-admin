@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 权限列表页面 -->
     <el-card>
       <!-- default-expand-all默认自动展开 -->
       <el-table

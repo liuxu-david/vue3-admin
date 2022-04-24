@@ -1,5 +1,6 @@
 <template>
   <div class="user-info-container">
+    <!-- 员工信息详情页面 -->
     <el-card class="printBtn">
       <el-button type="primary" :loading="printLoading" v-print="printObj">{{
         $t("msg.userInfo.print")

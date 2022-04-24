@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 点击角色弹出的dialog -->
     <el-dialog
       :model-value="modelValue"
       @close="closed"

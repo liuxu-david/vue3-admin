@@ -1,4 +1,5 @@
 <template>
+  <!-- 员工原理页面 -->
   <div class="user-manage-container">
     <!-- 头部两个导入导出按钮 -->
     <el-card>
@@ -158,7 +159,10 @@ const getListData = async () => {
 };
 getListData();
 // 监听语言的切换
+// console.log(getListData);
 watchSwitchLang(getListData);
+// 处理导入用户后数据不重新加载的问题
+onActivated(getListData);
 // 定义查看按钮
 const onShowClick = (id) => {
   // console.log(router.getRoutes());
@@ -195,8 +199,6 @@ const onImportExcelClick = () => {
   router.push("/user/import");
   // console.log(router.getRoutes());
 };
-// 处理导入用户后数据不重新加载的问题
-onActivated(getListData);
 
 // 点击导出按钮开始操作
 const exportToExcelVisible = ref(false);
