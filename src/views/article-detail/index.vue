@@ -26,7 +26,7 @@
 
 <script setup>
 import { ref } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { articleDetail } from "@/api/article";
 
 const route = useRoute();
@@ -37,8 +37,12 @@ const getArticleDetail = async () => {
 };
 getArticleDetail();
 // console.log(detail);
+
 // 点击编辑按钮进行操作
-const EditClick = () => {};
+const router = useRouter();
+const EditClick = () => {
+  router.push(`/article/editor/${articleId}`);
+};
 </script>
 
 <style lang="less" scoped>

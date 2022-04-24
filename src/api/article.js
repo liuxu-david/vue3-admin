@@ -30,3 +30,20 @@ export const articleDetail = (articleId) => {
         url: `/article/${articleId}`,
     });
 };
+// 定义markdown文章的提交接口
+export const createAticle = (data) => {
+    return request({
+        url: "/article/create",
+        method: "POST",
+        data,
+    });
+};
+
+// 定义编辑文章的接口u
+export const articleEdit = (data) => {
+    return request({
+        url: "/article/edit",
+        method: "POST",
+        data,
+    });
+};
