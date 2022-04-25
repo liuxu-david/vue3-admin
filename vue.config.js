@@ -14,7 +14,9 @@ module.exports = defineConfig({
 // vue.config.js
 module.exports = {
     // 配置代理服务器
+
     devServer: {
+        port: 6060,
         proxy: {
             "/api": {
                 // 要代理的服务器地址  这里不用写 api

@@ -163,6 +163,7 @@ getListData();
 watchSwitchLang(getListData);
 // 处理导入用户后数据不重新加载的问题
 onActivated(getListData);
+
 // 定义查看按钮
 const onShowClick = (id) => {
   // console.log(router.getRoutes());
